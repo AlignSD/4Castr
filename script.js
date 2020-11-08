@@ -163,11 +163,12 @@ $("button").on("click", function(event) {
 
 });
 
-  let fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+  var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
   $.ajax({
-    url: fiveDayURL,
+    url: fiveDay,
     method: "GET"
   }).then(function(responseFiveDay) {
+    console.log(fiveDay);
 
     
 
@@ -177,3 +178,4 @@ function getCities(){
   var getCity = localStorage.getItem("cities");
   console.log(getCity);
 }
+})
