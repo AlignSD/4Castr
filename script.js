@@ -1,6 +1,7 @@
 var apiKey = '4fbbb274cc7965f5029fef1b41f5f697';
 var cities = [];
 var cityUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey;
+// current weather and UV function call
 function currentWeather() {
   navigator.geolocation.getCurrentPosition(function (position){
     longitude = position.coords.longitude;
@@ -14,10 +15,10 @@ function currentWeather() {
     console.log(data);
     //clear search field
     $('.city').val(" ");
+    // append index id with uv index
     $('#index').text("UV: "+ index);
     
-            // if conditionals to add / remove btn classes, changing color
-            // originally one line like $uvIndex.addClass().removeClass() but just too long
+            // if else if conditionals to set the color of the uv index box based of the value of UV index
             if (index <= 2) {
                 $("#index").addClass("btn-success");
                 $("#index").removeClass("btn-warning btn-hazard btn-danger btn-climate-change");
@@ -26,7 +27,7 @@ function currentWeather() {
                 $("#index").addClass("btn-warning");
                 $("#index").removeClass("btn-success btn-hazard btn-danger btn-climate-change");
             }
-            // .btn-hazard is a custom class, riffing on Bootsrap, see style.css
+            
             else if (index <= 7) {
                 $("#index").addClass("btn-hazard");
                 $("#index").removeClass("btn-success btn-warning btn-danger btn-climate-change");
@@ -35,8 +36,7 @@ function currentWeather() {
                 $("#index").addClass("btn-danger");
                 $("#index").removeClass("btn-success btn-warning btn-hazard btn-climate-change");
             }
-            // .btn-climate-change, like .btn-hazard, is custom
-            // and it's funny because it is sad :(
+            
             else if (index >= 11) {
                 $("#index").addClass("btn-climate-change");
                 $("#index").removeClass("btn-success btn-warning btn-hazard btn-danger");
@@ -77,7 +77,7 @@ $.ajax({
 };
 
 currentWeather();
-// function to populate fiveDayForecast html elements
+// DEFAULT fiveDayForecast data population
 function fiveDayForecast(){
   var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=San+Diego&appid=" + apiKey;
 
@@ -85,6 +85,7 @@ function fiveDayForecast(){
     url: fiveDay,
     method: "GET"
   }).then(function(responseFiveDay) {
+    // weather icons for 5 day forecast
     var icon1 = responseFiveDay.list[4].weather[0].icon;
     var icon1url = "http://openweathermap.org/img/w/" + icon1 + ".png";
 
@@ -117,6 +118,7 @@ function fiveDayForecast(){
     var day4 = responseFiveDay.list[28].dt_txt;
     var day5 = responseFiveDay.list[36].dt_txt;
 
+    // appending values from API into html for each of the 5 days
     $("#day-1").html("<h5>" + day1.substr(0, 10) + "</h5>");
     $("#day-1").append("<img src=" + icon1url + ">");
     $("#day-1").append("<p>" + "Temp: " + tempOne + " °F </p>");
@@ -144,10 +146,10 @@ function fiveDayForecast(){
 
   });
 }
-
+// call fiveDayForecast function
 fiveDayForecast();
 
-
+// searchbox functionality
 $("button").on("click", function(event) {
   event.preventDefault();
 
@@ -173,11 +175,12 @@ $("button").on("click", function(event) {
     storeCities();
     getCities();
   }
-
+    // need to get search-data class to prepend a new li or P with what the users search for
     function renderCities() {
       $(".search-data").prepend("<p>" + cities + "</p>");
     }
     
+
     var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&q=" +
     city + "&appid=" + apiKey;
@@ -204,14 +207,14 @@ $("button").on("click", function(event) {
     $("#wicon").attr("src", iconurl);
 
 });
-
+  // five day section for when user searches for new city
   var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
   $.ajax({
     url: fiveDay,
     method: "GET"
   }).then(function(responseFiveDay) {
     console.log(fiveDay);
-
+    // icons for five day section
     var icon1 = responseFiveDay.list[4].weather[0].icon;
     var icon1url = "http://openweathermap.org/img/w/" + icon1 + ".png";
   
@@ -245,10 +248,9 @@ $("button").on("click", function(event) {
     var day4 = responseFiveDay.list[28].dt_txt;
     var day5 = responseFiveDay.list[36].dt_txt;
 
-    // var icon1Code = responseFiveDay.list[4].weather[0].icon;
-    // var icon1url = "http://openweathermap.org/img/w/" + icon1Code + ".png";
+    
 
-
+    // appends html with data from the city the user searches for
     $("#day-1").html("<h5>" + day1.substr(0, 10) + "</h5>");
     $("#day-1").append("<img src=" + icon1url + ">");
     $("#day-1").append("<p>" + "Temp: " + tempOne + " °F </p>");
@@ -285,4 +287,3 @@ function getCities(){
 }
 
 
-// $(".uvIndex").text("UV: " + response.main.)
