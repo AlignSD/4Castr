@@ -14,11 +14,37 @@ function currentWeather() {
     console.log(data);
     //clear search field
     $('.city').val(" ");
-    $('.index').text("UV: "+ index);
+    $('#index').text("UV: "+ index);
+    
+            // if conditionals to add / remove btn classes, changing color
+            // originally one line like $uvIndex.addClass().removeClass() but just too long
+            if (index <= 2) {
+                $("#index").addClass("btn-success");
+                $("#index").removeClass("btn-warning btn-hazard btn-danger btn-climate-change");
+            }
+            else if (index <= 5) {
+                $("#index").addClass("btn-warning");
+                $("#index").removeClass("btn-success btn-hazard btn-danger btn-climate-change");
+            }
+            // .btn-hazard is a custom class, riffing on Bootsrap, see style.css
+            else if (index <= 7) {
+                $("#index").addClass("btn-hazard");
+                $("#index").removeClass("btn-success btn-warning btn-danger btn-climate-change");
+            }
+            else if (index <= 10.99) {
+                $("#index").addClass("btn-danger");
+                $("#index").removeClass("btn-success btn-warning btn-hazard btn-climate-change");
+            }
+            // .btn-climate-change, like .btn-hazard, is custom
+            // and it's funny because it is sad :(
+            else if (index >= 11) {
+                $("#index").addClass("btn-climate-change");
+                $("#index").removeClass("btn-success btn-warning btn-hazard btn-danger");
     //display results
     displayDashbord();
     displaySearchedList();
-})
+}
+  })
   
 
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" +  apiKey;
