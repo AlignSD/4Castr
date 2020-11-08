@@ -18,18 +18,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar" id="search-card">
-                <form class="form-group mx-auto">
-                    <div class="form-group mx-sm-3">
+                <div class="card text-left"></div>
+                    <div class="card-body mx-sm-3">
+
                         <input type="text" class="form-control" id="get-weather" placeholder="Search">
+                        <button type="submit" class="btn btn-primary mb-2" id="run-search">Search</button>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2" id='run-search'>Search</button>
-                </form>
+                    
+                
       
         
                    <!-- city search container -->
                     <div class="invalid-message">
-                      <div class="list-group" id="list-tab" role="tablist">
-                          <ul id="search-list"></ul>
+                      <div class="search-data">
+                          <ul id="search-list">
+                            <li>test</li>
+                          </ul>
                           </ul>
                       </div>
                   </div>
@@ -48,6 +52,7 @@
                     <div class="temp"></div>
                     <div class="humidity"></div>
                     <div class="wind"></div>
+                    <div class="index"></div>
                 </div>
               </div>
               <!-- 5 day forecast section -->

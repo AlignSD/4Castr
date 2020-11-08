@@ -11,8 +11,10 @@ function currentWeather() {
   }).then(function (data) {
     //set a value for the current UV index.
     index = data.value;
+    console.log(data);
     //clear search field
     $('.city').val(" ");
+    $('.index').text("UV: "+ index);
     //display results
     displayDashbord();
     displaySearchedList();
@@ -40,7 +42,7 @@ $.ajax({
     // inputs wind speed text
     $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
     // UV Index
-    $('.index').text("UV: "+ index);
+    
     // inputs icon pic
     $("#wicon").attr("src", iconUrl);
 
@@ -147,9 +149,9 @@ $("button").on("click", function(event) {
   }
 
     function renderCities() {
-      $(".search-data").prepend("<p>" + city + "</p>");
+      $(".search-data").prepend("<p>" + cities + "</p>");
     }
-
+    
     var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&q=" +
     city + "&appid=" + apiKey;
@@ -253,6 +255,7 @@ $("button").on("click", function(event) {
 function getCities(){
   var getCity = localStorage.getItem("cities");
   console.log(getCity);
+  
 }
 
 
