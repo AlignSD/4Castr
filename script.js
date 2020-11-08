@@ -1,52 +1,12 @@
 var apiKey = '4fbbb274cc7965f5029fef1b41f5f697';
 var cities = [];
 var cityUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey;
+var searchUV = "http://api.openweathermap.org/data/2.5/uvi/forecast?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}";
 // current weather and UV function call
 function currentWeather() {
   navigator.geolocation.getCurrentPosition(function (position){
     longitude = position.coords.longitude;
     latitude = position.coords.latitude;
-    $.ajax({
-      url: cityUV + `&lat=${latitude}&lon=${longitude}`,
-      method: "GET"
-  }).then(function (data) {
-    //set a value for the current UV index.
-    index = data.value;
-    console.log(data);
-    //clear search field
-    $('.city').val(" ");
-    // append index id with uv index
-    $('#index').text("UV: "+ index);
-    
-            // if else if conditionals to set the color of the uv index box based of the value of UV index
-            if (index <= 2) {
-                $("#index").addClass("btn-success");
-                $("#index").removeClass("btn-warning btn-hazard btn-danger btn-climate-change");
-            }
-            else if (index <= 5) {
-                $("#index").addClass("btn-warning");
-                $("#index").removeClass("btn-success btn-hazard btn-danger btn-climate-change");
-            }
-            
-            else if (index <= 7) {
-                $("#index").addClass("btn-hazard");
-                $("#index").removeClass("btn-success btn-warning btn-danger btn-climate-change");
-            }
-            else if (index <= 10.99) {
-                $("#index").addClass("btn-danger");
-                $("#index").removeClass("btn-success btn-warning btn-hazard btn-climate-change");
-            }
-            
-            else if (index >= 11) {
-                $("#index").addClass("btn-climate-change");
-                $("#index").removeClass("btn-success btn-warning btn-hazard btn-danger");
-    //display results
-    displayDashbord();
-    displaySearchedList();
-}
-  })
-  
-
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" +  apiKey;
 
 
@@ -58,7 +18,48 @@ $.ajax({
   .then(function(response) {
     var iconPic = response.weather[0].icon;
     var iconUrl = "http://openweathermap.org/img/w/" + iconPic + ".png";
+    
   console.log(response);
+  
+  $.ajax({
+    url: cityUV + `&lat=${latitude}&lon=${longitude}`,
+    method: "GET"
+}).then(function (data) {
+  //set a value for the current UV index.
+  index = data.value;
+  console.log(data);
+  //clear search field
+  $('.city').val(" ");
+  // append index id with uv index
+  $('#index').text("UV: "+ index);
+  
+          // if else if conditionals to set the color of the uv index box based of the value of UV index
+          if (index <= 2) {
+              $("#index").addClass("btn-success");
+              $("#index").removeClass("btn-warning btn-hazard btn-danger btn-climate-change");
+          }
+          else if (index <= 5) {
+              $("#index").addClass("btn-warning");
+              $("#index").removeClass("btn-success btn-hazard btn-danger btn-climate-change");
+          }
+          
+          else if (index <= 7) {
+              $("#index").addClass("btn-hazard");
+              $("#index").removeClass("btn-success btn-warning btn-danger btn-climate-change");
+          }
+          else if (index <= 10.99) {
+              $("#index").addClass("btn-danger");
+              $("#index").removeClass("btn-success btn-warning btn-hazard btn-climate-change");
+          }
+          
+          else if (index >= 11) {
+              $("#index").addClass("btn-climate-change");
+              $("#index").removeClass("btn-success btn-warning btn-hazard btn-danger");
+  //display results
+  displayDashbord();
+  displaySearchedList();
+}
+})
   // inputs city text
   $(".city").html("<h1> " + response.name + " </h1>");
     // inputs temperature text
@@ -152,7 +153,7 @@ fiveDayForecast();
 // searchbox functionality
 $("button").on("click", function(event) {
   event.preventDefault();
-
+  
   let apiKey = '4fbbb274cc7965f5029fef1b41f5f697';
   var getWeather = $("#get-weather");
   // creates var from text input in searchbox
@@ -177,7 +178,7 @@ $("button").on("click", function(event) {
   }
     // need to get search-data class to prepend a new li or P with what the users search for
     function renderCities() {
-      $(".search-data").prepend("<p>" + cities + "</p>");
+      $(".search-data").prepend("<p>" + city + "</p>");
     }
     
 
@@ -198,6 +199,7 @@ $("button").on("click", function(event) {
     // transfering object information to html
     let iconCode = response.weather[0].icon;
     let iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    
     $(".city").html("<h1>" + response.name + "</h1>");
     // converts to F
     $(".temp").text(
@@ -205,6 +207,7 @@ $("button").on("click", function(event) {
     $(".humidity").text("Humidity: " + response.main.humidity + " %");
     $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
     $("#wicon").attr("src", iconurl);
+    $('#index').text("UV: "+ index);
 
 });
   // five day section for when user searches for new city
@@ -285,5 +288,4 @@ function getCities(){
   console.log(getCity);
   
 }
-
 
