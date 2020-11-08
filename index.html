@@ -17,96 +17,80 @@
    
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
+            <div class="col-sm-3 col-md-2 sidebar" id="search-card">
                 <form class="form-group mx-auto">
                     <div class="form-group mx-sm-3">
-                        <input type="text" class="form-control" id="SearchBox" placeholder="Search">
+                        <input type="text" class="form-control" id="get-weather" placeholder="Search">
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                    <button type="submit" class="btn btn-primary mb-2" id='run-search'>Search</button>
                 </form>
       
         
-                    <!-- <div class=""> -->
+                   <!-- city search container -->
         
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                        <ul id="search-list"></ul>
+                        </ul>
                     </div>
             </div> 
-            <div class="container row">
-            <div class="card col-sm-12">
+            <!-- current weather -->
+            <div class="container row weather-box">
+              <div class="card col-sm-12">
                 <div class="card-header">
                   Sample text for area
                 </div>
-                <div class="card-body">
-                  <blockquote class="blockquote mb-0">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    
-                  </blockquote>
+                <div class="card-body weather-container">
+                  <span>
+                    <div class="city"></div><img id="wicon"></img>
+                    <div style="font-style: italic; font-weight: bolder;" class="status"></div>
+                  </span>
+                    <div class="temp"></div>
+                    <div class="humidity"></div>
+                    <div class="wind"></div>
                 </div>
               </div>
-              <div class="card-header">
-                5 Day Forecast
+              <!-- 5 day forecast section -->
+              <div class="card-header forecast-container">
+                <h5 class="five-day">5-Day Forecast</h5>
               </div>
             
                 <div class="card-group">
                     
                     <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                      <div class="card-body forecast-card" id="day-1">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        
                       </div>
                     </div>
                     <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                      <div class="card-body forecast-card" id="day-2">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        
                       </div>
                     </div>
                     <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                      <div class="card-body forecast-card" id="day-3">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        
                       </div>
                     </div>
                     <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                      <div class="card-body forecast-card" id="day-4">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        
                       </div>
                     </div>
                     <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                      <div class="card-body forecast-card" id="day-5">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        
                       </div>
                     </div>
+                    
                   </div>
-                <!-- <div class="row"> -->
-                <div class="7">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">..asdasdasdas.</div>
-                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
-                    </div>
-                </div>
-             
-        </div>
-    </div>
-    </div>
+              </div>
+          </div>
+      </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
